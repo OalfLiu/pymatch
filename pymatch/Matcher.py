@@ -300,7 +300,7 @@ class Matcher:
         test_results = []
         for col in self.matched_data.columns:
             is_continuous = (col in self.X.columns) or ("Q('{}')".format(col) in self.X.columns)
-            if is_continuous(col, self.X) and col not in self.exclude:
+            if is_continuous and col not in self.exclude:
                 # organize data
                 trb, cob = self.test[col], self.control[col]
                 tra = self.matched_data[self.matched_data[self.yvar]==True][col]
@@ -407,7 +407,7 @@ class Matcher:
         test_results = []
         for col in self.matched_data.columns:
             is_continuous = (col in self.X.columns) or ("Q('{}')".format(col) in self.X.columns)
-            if not is_continuous(col, self.X) and col not in self.exclude:
+            if not is_continuous and col not in self.exclude:
                 dbefore = prep_plot(self.data, col, colname="before")
                 dafter = prep_plot(self.matched_data, col, colname="after")
                 df = dbefore.join(dafter)
